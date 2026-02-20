@@ -1,5 +1,6 @@
 import os, disnake, requests, psycopg2, base64
 from disnake.ext import tasks
+from Crypto.Cipher import AES
 from dotenv import load_dotenv
 from disnake.ext import commands
 
