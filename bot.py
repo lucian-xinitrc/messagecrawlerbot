@@ -38,7 +38,7 @@ async def watcher():
 
 	    author, msg = row
 	    channel = bot.get_channel(1473044902492246219)
-	    decryptedMsg = config.Config().decrypt(msg)
+	    decryptedMsg = decrypt(msg)
 	    check = True
 	    if channel:
 	        for word in ["login", "register", "msg", "/give"]:
@@ -46,7 +46,7 @@ async def watcher():
 	        		check = False
 	        		break
 	        if check:
-	        	await channel.send(f"**{config.Config().decrypt(author)}**: {config.Config().decrypt(msg)}")
+	        	await channel.send(f"**{decrypt(author)}**: {decrypt(msg)}")
 
 watcher.start()
 
