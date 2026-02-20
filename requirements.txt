@@ -1,0 +1,7 @@
+disnake
+asyncio
+requests
+datetime
+dotenv
+psycopg2-binary
+pycryptodome
