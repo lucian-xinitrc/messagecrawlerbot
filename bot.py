@@ -12,7 +12,6 @@ bot = commands.Bot(
 )
 
 last_cache = None
-
 def decrypt(ciphertext_b64):
 	    cipher = AES.new(os.getenv('encryption_key').encode(), AES.MODE_ECB)
 	    decrypted = cipher.decrypt(base64.b64decode(ciphertext_b64))
