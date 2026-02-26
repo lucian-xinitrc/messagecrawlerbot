@@ -50,7 +50,6 @@ async def watcher():
 
 watcher.start()
 
-
 @bot.event
 async def on_ready():
 	activity = disnake.Game(name="Scanning for messages...")
