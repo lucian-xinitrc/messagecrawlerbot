@@ -21,35 +21,42 @@ def decrypt(ciphertext_b64):
 @tasks.loop(seconds=2)
 async def watcher():
 	global last_cache
-	db = os.getenv('db_url')
-	conn = psycopg2.connect(db)
-	cur = conn.cursor()
+	try
+		db = os.getenv('db_url')
+		conn = psycopg2.connect(db)
+		cur = conn.cursor()
 
-	cur.execute("SELECT author, message FROM public.last_message WHERE id = 1")
-	row = cur.fetchone()
+		cur.execute("SELECT author, message FROM public.last_message WHERE id = 1")
+		row = cur.fetchone()
 
-	cur.close()
-	conn.close()
-	if not row:
-	    return
+		cur.close()
+		conn.close()
+		if not row:
+		    return
 
-	if row != last_cache:
-	    last_cache = row
+		if row != last_cache:
+		    last_cache = row
 
-	    author, msg = row
-	    channel = bot.get_channel(1473044902492246219)
-	    decryptedMsg = decrypt(msg)
-	    check = True
-	    if channel:
-	        for word in ["login", "register", "msg", "/give"]:
-	        	if word in decryptedMsg:
-	        		check = False
-	        		break
-	        if check:
-	        	await channel.send(f"**{decrypt(author)}**: {decrypt(msg)}")
+		    author, msg = row
+		    channel = bot.get_channel(1473044902492246219)
+		    decryptedMsg = decrypt(msg)
+		    check = True
+		    if channel:
+		        for word in ["login", "register", "msg", "/give"]:
+		        	if word in decryptedMsg:
+		        		check = False
+		        		break
+		        if check:
+		        	await channel.send(f"**{decrypt(author)}**: {decrypt(msg)}")
 
-watcher.start()
+	except:
+		print("[ PostgreSQL - issue ] Issues with postgresSQL data retrieval")
 
+try:
+	watcher.start()
+except:
+	print("No message intercepted, still searching.")
+  
 @bot.event
 async def on_ready():
 	activity = disnake.Game(name="Scanning for messages...")
