@@ -52,6 +52,7 @@ async def watcher():
 	except:
 		print("[ PostgreSQL - issue ] Issues with postgresSQL data retrieval")
 
+
 try:
 	watcher.start()
 except:
