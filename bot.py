@@ -57,7 +57,7 @@ try:
 	watcher.start()
 except:
 	print("No message intercepted, still searching.")
-  
+
 @bot.event
 async def on_ready():
 	activity = disnake.Game(name="Scanning for messages...")
