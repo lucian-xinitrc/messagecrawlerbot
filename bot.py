@@ -21,7 +21,7 @@ def decrypt(ciphertext_b64):
 @tasks.loop(seconds=2)
 async def watcher():
 	global last_cache
-	try
+	try:
 		db = os.getenv('db_url')
 		conn = psycopg2.connect(db)
 		cur = conn.cursor()
