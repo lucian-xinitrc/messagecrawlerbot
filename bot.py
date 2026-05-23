@@ -10,6 +10,7 @@ bot = commands.Bot(
 	intents=disnake.Intents.all(), 
 	allowed_mentions=disnake.AllowedMentions(everyone=True)
 )
+
 last_cache = None
 def decrypt(ciphertext_b64):
 	    cipher = AES.new(os.getenv('encryption_key').encode(), AES.MODE_ECB)
